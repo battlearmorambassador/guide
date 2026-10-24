@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Versions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>Versions</h1>
+  <p class="muted">Pick the version you want to download. Steam versions are official releases downloaded from Steam. User installations are full game copies shared by users, which only work with some languages and graphics drivers.</p>
+  <input class="search" id="q" type="search" placeholder="Search by version or update name…" autocomplete="off" spellcheck="false">
+  <div class="filters" id="filters">
+    <button type="button" data-f="all" class="on">All</button>
+    <button type="button" data-f="steam">Steam</button>
+    <button type="button" data-f="user">User installations</button>
+  </div>
+  <p class="status" id="status"><span class="spinner"></span>Loading the version list…</p>
+  <div class="vlist" id="list" hidden></div>
+</main>
+<script>
+  const list = $("#list"), status = $("#status");
+  let all = [], kind = "all";
+  const draw = () => {
+    const q = $("#q").value.trim().toLowerCase();
+    const rows = all.filter((v) => (kind === "all" || v.kind === kind) && (!q || (v.version + " " + v.title + " " + v.build).toLowerCase().includes(q)));
+    status.textContent = rows.length + (rows.length === 1 ? " version" : " versions");
+    list.hidden = !rows.length;
+    list.innerHTML = rows.map((v) => `<a class="vrow" href="version.html?${v.kind === "steam" ? "m=" + v.manifest : "u=" + encodeURIComponent(v.id)}">
+      <span class="ver">${esc(v.version)}</span>
+      <span class="ttl">${esc(v.title)}<span class="build">${esc(v.build)}</span></span>
+      <span class="tags">${v.kind === "steam" ? '<span class="tag steam">Steam</span>' : '<span class="tag">User installation</span>'}${v.hotfix ? '<span class="tag hot">Hotfixes</span>' : ""}</span>
+    </a>`).join("");
+  };
+  loadVersions().then((d) => {
+    all = [...d.steam.map((v) => ({ ...v, kind: "steam", hotfix: d.patches.has(v.manifest) })), ...d.users.map((v) => ({ ...v, kind: "user" }))]
+      .sort((a, b) => cmpVersion(versionKey(b.version), versionKey(a.version)) || (a.kind === "steam" ? -1 : 1));
+    draw();
+  }).catch((e) => (status.textContent = "Could not load the version list: " + e.message));
+  $("#q").addEventListener("input", draw);
+  for (const b of $("#filters").children) b.onclick = () => {
+    kind = b.dataset.f;
+    for (const x of $("#filters").children) x.classList.toggle("on", x === b);
+    draw();
+  };
+</script>
+</body>
+</html>

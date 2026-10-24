@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Importing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>Importing your live account data</h1>
+  <h2>Using AlecaFrame</h2>
+  <p>If you are using AlecaFrame, your encrypted inventory is already stored on your machine. You can use <a href="https://sainan.github.io/alecaframe-inventory-parser/" target="_blank" rel="noopener">this tool</a> to help you locate and decrypt it.</p>
+
+  <h2>Using warframe-api-helper</h2>
+  <p>Download <a href="https://github.com/Sainan/warframe-api-helper/releases/latest" target="_blank" rel="noopener">warframe-api-helper</a> to get your credentials while the game is running and logged in on live. It will download your inventory for you and store it in <code>inventory.json</code>.</p>
+  <p>Using the credentials it prints (<code>?accountId=...&amp;nonce=...</code>), it is also possible to get your personal rooms: <code>https://api.warframe.com/api/getShip.php?accountId=...&amp;nonce=...</code></p>
+  <p class="warn">Closing the game will invalidate these credentials.</p>
+
+  <h2>Importing to your server</h2>
+  <p>Now that you have your inventory, open the <a href="http://localhost/webui/" target="_blank" rel="noopener">WebUI</a> and click on <strong>Import</strong>. Paste the content of your inventory and click <strong>Submit</strong>.</p>
+  <p>If you have a <code>getShip</code> response, you can import it the same way. Otherwise, use <strong>Unlock All Ship Features</strong> in the Cheats tab to avoid being locked out of most things.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1><abbr title="Frequently Asked Questions">FAQ</abbr></h1>
+  <h2>General</h2>
+  <div class="faq">
+    <details name="faq">
+      <summary>Can I get banned for any of this?</summary>
+      <p>No. You're not playing the latest version here. You're not connecting to the live servers. As such, no one ever got banned for doing any of this.</p>
+    </details>
+    <details name="faq">
+      <summary>How can I play on the latest version?</summary>
+      <p>We are one version behind as this is a preservation project. Discussion about modifying versions beyond the latest supported is banned both from git and Discord.</p>
+    </details>
+    <details name="faq">
+      <summary>How come I see my email/warframe on the login screen?</summary>
+      <p>You may see your email address and appearance from live servers on the login screen for your local server and vice-versa. This is because all versions/installations of Warframe use the same cache for this. This cache never leaves your computer.</p>
+    </details>
+    <details name="faq">
+      <summary>Are DE aware of this? Are they okay with this?</summary>
+      <p>They are likely at least partially aware of this project. How they feel about it is unclear, and that's not for a lack of trying to get a response.</p>
+    </details>
+    <details name="faq">
+      <summary>Can I play with friends?</summary>
+      <p>Yes. The person hosting sets up the server and makes it reachable, e.g. with <a href="port-forwarding.html">Port Forwarding</a>. Everyone else only needs the same game version and the <a href="client-setup.html">Client Setup</a>, with the host's address as <code>server_host</code>. To be in the same squad, the host also needs to configure <a href="multiplayer.html">NRS</a>.</p>
+    </details>
+  </div>
+
+  <h2>Troubleshooting</h2>
+  <div class="faq">
+    <details name="faq">
+      <summary>I can't log in. What should I check?</summary>
+      <ul>
+        <li>The server window is still open and shows no errors.</li>
+        <li><a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> opens the SpaceNinjaServer WebUI (if the server runs on your computer).</li>
+        <li><code>server_host</code> in <code>OpenWF/Client Config.json</code> is the right address (<code>127.0.0.1</code> for a server on your computer).</li>
+        <li><code>OpenWF/Client Config.json</code> is still valid JSON after your edits (quotes and commas intact). You can check it with this <a href="https://json.toolaska.com/" target="_blank" rel="noopener">JSON validator</a>.</li>
+        <li>You're using the same email and password as when the account was created.</li>
+      </ul>
+    </details>
+    <details name="faq">
+      <summary>"git" or "npm" is not recognized as a command</summary>
+      <p>Make sure Git and Node.js are installed (see the <a href="index.html">prerequisites</a>), then close the command prompt and open a new one. A command prompt that was already open before the installation doesn't know about them yet.</p>
+    </details>
+    <details name="faq">
+      <summary>The server won't start because port 80 or 443 is already in use</summary>
+      <p>Another program (e.g. another web server) is using that port. Either close that program, or change <code>httpPort</code>/<code>httpsPort</code> in SpaceNinjaServer's <code>config.json</code> and set the same values as <code>http_port</code>/<code>https_port</code> in <code>OpenWF/Client Config.json</code>.</p>
+    </details>
+    <details name="faq">
+      <summary>My files ended up in C:\Windows\System32</summary>
+      <p>This happens when commands are run from a command prompt opened via the Start menu, which starts in <code>C:\Windows\System32</code>. Move the downloaded folder (e.g. SpaceNinjaServer) somewhere else, such as your Desktop. Next time, open the command prompt in a dedicated folder: in File Explorer, type <code>cmd</code> in the address bar and press Enter.</p>
+    </details>
+  </div>
+</main>
+<script>
+  const items = document.querySelectorAll(".faq details");
+  for (const d of items) d.addEventListener("toggle", () => { if (d.open) for (const o of items) if (o !== d) o.open = false; });
+</script>
+</body>
+</html>

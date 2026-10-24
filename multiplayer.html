@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiplayer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>NRS Setup</h1>
+  <p>NRS is used to exchange presence and session information, which is needed to establish squads. Because we don't want people spinning up "private servers" in the sense of being an alternative to the MMO experience that is offered on the live servers (especially where the server operator could add monetization), all options here have some trade-offs.</p>
+
+  <h2>e-nrs</h2>
+  <p>This instance runs an implementation supporting <strong>7.3.0 - 43.5.4</strong> and proxying. You can configure SpaceNinjaServer to instruct your clients to connect to it like so:</p>
+  <ul>
+    <li>Set <code>"nrsAddresses"</code> to <code>["e-nrs.source.wf"]</code></li>
+    <li>Set <code>"dtls"</code> to <code>99</code></li>
+  </ul>
+
+  <h2>o-nrs</h2>
+  <p>This instance runs an implementation supporting <strong>35.5.0 - 40.0.5.1</strong>. You can configure SpaceNinjaServer to instruct your clients to connect to it like so:</p>
+  <ul>
+    <li>Set <code>"nrsAddresses"</code> to <code>["o-nrs.source.wf"]</code></li>
+    <li>Set <code>"dtls"</code> to <code>99</code></li>
+  </ul>
+
+  <h2>lan-nrs</h2>
+  <p>This implementation supports <strong>7.3.0 - 10.8.0</strong> for up to 4 players in the same LAN. The latest release can be downloaded <a href="https://openwf.io/supplementals/lan-nrs-1.0.0.zip">here</a>. Take note of the README and on-screen instructions.</p>
+</main>
+</body>
+</html>

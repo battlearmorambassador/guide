@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Server Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>Server Setup</h1>
+
+  <p class="warn">All commands below must be typed in a command prompt (cmd) or terminal, not in the File Explorer or a browser. The command prompt has to be opened in a dedicated folder (e.g. on your Desktop or another drive), not in <code>C:\Windows\System32</code>, which is where it starts when opened from the Start menu. On Windows, the easiest way is to open the folder in File Explorer, type <code>cmd</code> in the address bar and press Enter.</p>
+
+  <h3>Steps</h3>
+  <ul>
+    <li>Run this in your command prompt to download SpaceNinjaServer into a new <code>SpaceNinjaServer</code> folder inside the current folder:
+      <div class="cmd"><code>git clone https://openwf.io/SpaceNinjaServer.git</code></div></li>
+    <li>Open the SpaceNinjaServer folder:
+      <div class="cmd"><code>cd SpaceNinjaServer</code></div></li>
+    <li>Copy <code>config-vanilla.json</code> to create a <code>config.json</code>:
+      <ul>
+        <li>Windows: <div class="cmd"><code>copy config-vanilla.json config.json</code></div></li>
+        <li>Linux: <div class="cmd"><code>cp config-vanilla.json config.json</code></div></li>
+      </ul></li>
+    <li>(Optional) If you have a GB of free space, you might want to download stripped assets such as ability videos so the client can request them on-demand:
+      <div class="cmd"><code>cd static/data &amp;&amp; git clone https://openwf.io/stripped-assets.git &amp;&amp; cd ../..</code></div></li>
+    <li>Install library dependencies:
+      <div class="cmd"><code>npm install --omit=dev --omit=optional</code></div></li>
+    <li>Now you can start the server anytime with:
+      <div class="cmd"><code>npm run raw</code></div></li>
+  </ul>
+  <p class="info">Linux note: OpenWF software uses ports 80 and 443 by default, which require root/su permissions to bind.</p>
+  <h2>First login</h2>
+  <ul>
+    <li>Start the server (using <code>UPDATE AND START SERVER.bat</code> or in a cmd window with <code>npm run raw</code>) and leave its window open for as long as you play. To check that it's running, open <a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> in your browser: you should see the WebUI.</li>
+    <li>Start the game with the <code>Launch with OpenWF</code> script from your game folder (see <a href="client-setup.html">Client Setup</a>).</li>
+    <li>On U33 and newer, the top-left corner of the login screen shows <strong>OpenWF @ 127.0.0.1</strong> (or whatever your <code>server_host</code> is). If a warning appears underneath it, the game can't reach the server: check that the server window is still open and that <code>server_host</code> is correct.</li>
+    <li>Enter any email address and password and log in. The first time, an account is created with them automatically. Use the same email and password every time after that.</li>
+  </ul>
+  <p>That's it: you're playing on your own server. These guides are optional extras: <a href="importing.html">Importing your live account</a>, <a href="chat-hubs.html">Chat &amp; Hubs</a> and <a href="multiplayer.html">Multiplayer</a>.</p>
+  <h2>Usage</h2>
+  <p>With the server running, you can obviously connect to it with a patched Warframe installation.</p>
+  <p>When logging in with an email address that has no associated account, it will automatically be created (<code>autoCreateAccount</code> in <code>config.json</code>). If you want newly-created accounts to be past the tutorial, set <code>skipTutorial</code> to <code>true</code> in the <code>config.json</code>.</p>
+  <p>Furthermore, SpaceNinjaServer has a WebUI that you can access at <a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> where you can view and edit your savedata, as well as modify the server's config.</p>
+  <h2>Updating your server</h2>
+  <p>SpaceNinjaServer is <a href="https://onlyg.it/OpenWF/SpaceNinjaServer/commits/branch/main" target="_blank" rel="noopener">constantly updated</a> with new features and bug fixes, which is why it comes with an <code>UPDATE AND START SERVER</code> script.</p>
+</main>
+</body>
+</html>

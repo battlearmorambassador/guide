@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chat &amp; Hubs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>Chat &amp; Hubs</h1>
+  <h2>IRC</h2>
+  <ul>
+    <li><a href="https://github.com/Sainan/warframe-irc-server/releases" target="_blank" rel="noopener">warframe-irc-server</a> (recommended): an IRC server specifically made for OpenWF. Talks to SpaceNinjaServer to give "chat moderator" permissions and report dropped connections.</li>
+    <li>InspIRCd: a well-known IRC server implementation used by DE themselves (albeit with unknown modifications). A pre-configured Windows copy of it can be downloaded <a href="https://openwf.io/supplementals/IRC.zip">here</a>.</li>
+  </ul>
+  <h2>Hubs (relays and dojos)</h2>
+  <p>Hubs (including relays and dojos) require a proprietary server for Prex Cards to appear, and, if multiple players are on the same server, for them to see and interact with each other (blessings, trading).</p>
+  <ul>
+    <li>Download <a href="https://github.com/Sainan/warframe-hub-server/releases" target="_blank" rel="noopener">warframe-hub-server</a>.<br>
+      <span class="sub">Source code: <a href="https://github.com/Sainan/warframe-hub-server" target="_blank" rel="noopener">github.com/Sainan/warframe-hub-server</a></span></li>
+    <li>Run it whenever to start the hub server.</li>
+  </ul>
+  <h2>Auto-start</h2>
+  <p>You can provide a relative path to the executable in SpaceNinjaServer's <code>config.json</code> under <code>ircExecutable</code> and <code>hubExecutable</code> to have SpaceNinjaServer run it as a child process.</p>
+  <p>On Windows, you can put a shortcut to the executable in <code>%appdata%\Microsoft\Windows\Start Menu\Programs\Startup</code> to have it start when you log in to Windows.</p>
+</main>
+</body>
+</html>

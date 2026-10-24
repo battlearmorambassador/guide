@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main id="page">
+  <p class="status"><span class="spinner"></span>Loading…</p>
+</main>
+<script>
+  const page = $("#page");
+  const params = new URLSearchParams(location.search);
+  const manifest = params.get("m"), userId = params.get("u");
+  const methods = {
+    mango: (m) => `
+      <h3>Use mango (recommended)${tip("To install mango, open a command prompt and type <code>npm i -g steam-manifest-tools</code>.")}</h3>
+      <ul>
+        <li>Create a dedicated folder and open a command prompt/terminal in it (on Windows, type <code>cmd</code> in the File Explorer address bar and press Enter). Don't run the commands below from the default path (<code>C:\\Windows\\System32</code>).</li>
+        <li>Download this version by typing:
+          <div class="cmd"><code>mango download-and-install 230411 ${m}</code></div></li>
+      </ul>
+      <p>When the download and install are complete, the command prompt shows a new input line and is ready for another command. The process might show errors while it runs: ignore them until it has finished.</p>`,
+    dd: (m) => `
+      <h3>Use DepotDownloader</h3>
+      <ul>
+        <li>Download <a href="https://github.com/SteamRE/DepotDownloader/releases" target="_blank" rel="noopener">DepotDownloader</a> and extract it.</li>
+        <li>Open a command prompt/terminal in the folder where you have <code>DepotDownloader.exe</code>.</li>
+        <li>Run DepotDownloader:
+          <div class="cmd"><code>DepotDownloader -app 230410 -depot 230411 -manifest ${m} -username &lt;your steam username&gt; -remember-password</code></div></li>
+      </ul>
+      <p>Note that DepotDownloader may report errors; these are generally only temporary and it will try again.</p>`,
+    steam: (m) => `
+      <h3>Use the Steam console</h3>
+      <p class="warn">This method is not recommended unless you absolutely know what you are doing. You will also need a Steam account with Warframe in its library.</p>
+      <ul>
+        <li>Open Steam's console.</li>
+        <li>Run:
+          <div class="cmd"><code>download_depot 230410 230411 ${m}</code></div></li>
+      </ul>
+      <p>The resulting installation will be stored in <code>C:\\Program Files (x86)\\Steam\\steamapps\\content\\app_230410\\depot_230411</code> or equivalent. Once the download is finished, the console will tell you the exact path. Note that you'll want to clean out this folder for subsequent depot downloads to avoid corruption.</p>`,
+  };
+
+  const userPage = (v) => `
+      <p class="sub"><a href="versions.html">← All versions</a></p>
+      <h1>Downloading ${esc(v.title)} ${esc(v.version)}</h1>
+      <p class="muted">User installation · Build <code>${esc(v.build)}</code></p>
+      <p>Please note that this is a full game installation provided by a user. It only has the content required to launch in specific configurations:</p>
+      <ul>
+        <li>Language: ${v.langs.map((x) => `<code>${esc(x)}</code>`).join(", ") || "unknown"}</li>
+        <li>Graphics driver: ${v.drivers.map((x) => `<code>${esc(x)}</code>`).join(", ") || "unknown"}</li>
+      </ul>
+      <p>To download it, you will need BitTorrent v1 compatible software (such as <a href="https://www.qbittorrent.org/" target="_blank" rel="noopener">qBittorrent</a>): ${[v.torrent && `<a href="${esc(v.torrent)}">Torrent</a>`, v.magnet && `<a href="${esc(v.magnet)}">Magnet</a>`].filter(Boolean).join(" or ")}.</p>
+      ${v.catLabels ? `<p>As far as the font of the underlying language allows, you can use label replacements to use another language: <a href="${esc(v.catLabels)}">Magnet</a>.</p>` : ""}
+      ${v.notes ? `<p class="info">Notes for this version: ${v.notes}</p>` : ""}
+      <p>You can then proceed to the <a href="client-setup.html">client setup</a> part of this guide.</p>`;
+
+  loadVersions().then((d) => {
+    if (userId) {
+      const u = d.users.find((x) => x.id === userId);
+      page.innerHTML = u ? userPage(u) : `<h1>Version not found</h1><p>This version isn't in the list. <a href="versions.html">Back to all versions</a></p>`;
+      if (u) document.title = `${u.title} ${u.version}`;
+      return;
+    }
+    const v = d.steam.find((x) => x.manifest === manifest);
+    if (!v) {
+      page.innerHTML = `<h1>Version not found</h1><p>This version isn't in the list. <a href="versions.html">Back to all versions</a></p>`;
+      return;
+    }
+    document.title = `${v.title} ${v.version}`;
+    const hot = d.patches.get(v.manifest);
+    const fixes = hot ? hot.versions.filter((x) => cmpVersion(x, v.version) > 0) : [];
+    const range = fixes.length > 1 ? `${fixes[0]} - ${fixes[fixes.length - 1]}` : fixes[0] || "";
+    page.innerHTML = `
+      <p class="sub"><a href="versions.html">← All versions</a></p>
+      <h1>Downloading ${esc(v.title)} ${esc(v.version)}</h1>
+      <p class="muted">Build <code>${esc(v.build)}</code> · Manifest <code>${v.manifest}</code></p>
+      <div class="box" id="method"></div>
+      <div class="methods" id="switch"></div>
+      ${fixes.length ? `
+      <h2>Hotfixes</h2>
+      <p>Hotfixes are available for this version. If you want to upgrade <strong>${esc(v.title)}</strong> to <strong>${esc(range)}</strong>, download the update patch from
+        ${[hot.mega && `<a href="${esc(hot.mega)}" target="_blank" rel="noopener">Mega</a>`, hot.torrent && `<a href="${esc(hot.torrent)}">Torrent</a>`, hot.magnet && `<a href="${esc(hot.magnet)}">Magnet</a>`].filter(Boolean).join(", ").replace(/, ([^,]*)$/, " or $1")}.</p>
+      <p>Open the <code>*.wim</code> file with any archive browser, find the update patch you want, then drag and drop its content in the base install folder. Replace existing files when prompted.</p>` : ""}
+      <p>You can then proceed to the <a href="client-setup.html">client setup</a> part of this guide.</p>`;
+    const names = { mango: "mango", dd: "DepotDownloader", steam: "Steam Console" };
+    const show = (key) => {
+      $("#method").innerHTML = methods[key](v.manifest);
+      copyButtons($("#method"));
+      const others = Object.keys(methods).filter((k) => k !== key);
+      $("#switch").innerHTML = `Want to use ${others.map((k) => `<button type="button" data-k="${k}">${names[k]}</button>`).join(" or ")}?`;
+      for (const b of $("#switch").querySelectorAll("button")) b.onclick = () => show(b.dataset.k);
+    };
+    show("mango");
+  }).catch((e) => (page.innerHTML = `<p class="status">Could not load the version list: ${esc(e.message)}</p>`));
+</script>
+</body>
+</html>

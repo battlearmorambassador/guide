@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metadata Patching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main class="manual"><div id="page"></div></main>
+<script>loadUpstream("metadata-patching.php", $("#page"), "Metadata Patching", (doc) => {
+  for (const p of doc.querySelectorAll("p")) {
+    if (p.textContent.trim().startsWith("Warframe uses metadata")) {
+      p.textContent = "Warframe uses metadata for many configurations, e.g. what upgrades a mod gives, what abilities a warframe has, etc. For this guide, we will be creating a metadata patch for a mod from scratch.";
+      break;
+    }
+  }
+  const h = [...doc.querySelectorAll("h2")].find((x) => x.textContent.trim() === "Patching Metadata");
+  if (h) h.insertAdjacentHTML("afterend", `<p class="warn">For quick patches, use the <a href="${BUILDER}">Metadata Patch Builder</a>. To learn how to write patches by hand, follow the steps below.</p>`);
+  for (const p of doc.querySelectorAll("p")) {
+    if (p.querySelector("a") || !p.textContent.includes("Bootstrapper's manual")) continue;
+    p.innerHTML = p.innerHTML.replace("the Bootstrapper's manual", `the <a href="manual.html">Bootstrapper's manual</a>`);
+  }
+});</script>
+</body>
+</html>

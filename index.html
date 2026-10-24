@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenWF Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <p class="lead">OpenWF is a community project that aims at preserving Warframe and playing offline.</p>
+
+  <h2>Prerequisites</h2>
+  <p>Before proceeding with the guide, make sure to have the following software installed on your machine:</p>
+  <ul>
+    <li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a></li>
+    <li><a href="https://nodejs.org/en/download" target="_blank" rel="noopener">Node.js</a></li>
+  </ul>
+  <p class="warn">Mandatory. The following steps will not work without them.</p>
+  <h2>Must know</h2>
+  <ul>
+    <li><strong>SpaceNinjaServer</strong> is your local server where all gets redirected to.</li>
+    <li><strong>WebUI</strong> is your server's interface, where you can manage your inventory and enable cheats.</li>
+    <li><strong>Client</strong> is whatever refers to the bootstrapper and subsequent folders, located next to the game's executable file.</li>
+    <li><code>localhost:6155</code> is the interface that interacts directly with the bootstrapper, notably for script execution, metadata parsing and custom tweaks.</li>
+  </ul>
+  <h2>Get Started</h2>
+  <p>Do you have any Warframe install that is between versions <strong id="lowest">…</strong> and <strong id="highest">…</strong> on your machine?</p>
+  <p class="warn"><span class="icon" id="warn-icon"></span>Following the next steps using version above <strong class="highest">…</strong> will result in an error. Support will not be provided.</p>
+  <div class="choices">
+    <a class="btn btn-primary" href="client-setup.html">Yes</a>
+    <a class="btn" href="versions.html">No</a>
+  </div>
+</main>
+<script>
+  $("#warn-icon").innerHTML = tipIcon;
+  loadVersions().then((v) => {
+    $("#lowest").textContent = v.lowest;
+    $("#highest").textContent = v.highest;
+    for (const el of document.querySelectorAll(".highest")) el.textContent = v.highest;
+  }).catch(() => {
+    $("#lowest").textContent = "the oldest supported";
+    $("#highest").textContent = "the latest";
+    for (const el of document.querySelectorAll(".highest")) el.textContent = "the latest supported version";
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>Client Setup</h1>
+  <ul>
+    <li>Download <a href="https://github.com/spaceninjaserver/about.openwf.io/raw/main/supplementals/Bootstrapper%20Setup.exe">Bootstrapper Setup</a> (<a href="https://openwf.io/supplementals/Bootstrapper%20Setup.sh">Linux version</a>).<br>
+      <span class="sub">Source code: <a href="https://onlyg.it/OpenWF/Bootstrapper-Setup" target="_blank" rel="noopener">onlyg.it/OpenWF/Bootstrapper-Setup</a></span></li>
+    <li>Move it next to the game's executable and double click on it, then delete Bootstrapper Setup from this folder.</li>
+  </ul>
+  <h2>Config</h2>
+  <p class="warn">This won't let you log in unless your <code>OpenWF/Client Config.json</code> (which is in the next step) is valid and you have completed the <a href="server-setup.html">Server Setup</a> (or have the address of a server someone else is running).</p>
+  <ul>
+    <li>To start the game, run the <code>Launch with OpenWF</code> script.</li>
+    <li>The <code>OpenWF/Client Config.json</code> file gives you many options, such as the fallback language and graphics driver. For the language, input the 2-letter code, so <code>en</code> for English, <code>zh</code> for Chinese (Simplified), etc.</li>
+    <li>While the game is running, you can visit <a href="http://localhost:6155/" target="_blank" rel="noopener">http://localhost:6155/</a> to access Bootstrapper features like scripts.</li>
+    <li>To join a server that isn't running on your computer, set <code>server_host</code> in <code>OpenWF/Client Config.json</code> to its address.</li>
+  </ul>
+  <p>For more information, check out the Bootstrapper's comprehensive <a href="manual.html">manual</a>, which you can also find in the <code>OpenWF/Reference Manual.html</code> file.</p>
+</main>
+</body>
+</html>
