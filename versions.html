@@ -26,12 +26,21 @@
 <script>
   const list = $("#list"), status = $("#status");
   let all = [], kind = "all";
+  const OLD_NOTE = `<div class="vnote">
+    <strong>2013 Warframe (U8 and below)</strong>
+    <p>As you're revisiting the earliest versions, some things to note:</p>
+    <ul>
+      <li>Usage of a client patch (such as the Bootstrapper) is optional for versions below U8 as you can simply pass <code class="nw">-webserver:http://localhost/api/</code> as an argument.</li>
+      <li>There is an alternative to SpaceNinjaServer for U7 &amp; U8, that being Mekael's <a href="https://github.com/mekael/WFClassic" target="_blank" rel="noopener">WFClassic</a>.</li>
+    </ul>
+  </div>`;
   const draw = () => {
     const q = $("#q").value.trim().toLowerCase();
     const rows = all.filter((v) => (kind === "all" || v.kind === kind) && (!q || (v.version + " " + v.title + " " + v.build).toLowerCase().includes(q)));
     status.textContent = rows.length + (rows.length === 1 ? " version" : " versions");
     list.hidden = !rows.length;
-    list.innerHTML = rows.map((v) => `<a class="vrow" href="version.html?${v.kind === "steam" ? "m=" + v.manifest : "u=" + encodeURIComponent(v.id)}">
+    const era = rows.findIndex((v) => cmpVersion(versionKey(v.version), "9") < 0);
+    list.innerHTML = rows.map((v, i) => (i === era ? OLD_NOTE : "") + `<a class="vrow" href="version.html?${v.kind === "steam" ? "m=" + v.manifest : "u=" + encodeURIComponent(v.id)}">
       <span class="ver">${esc(v.version)}${v.upTo ? `<span class="upto">to ${esc(v.upTo)}</span>` : ""}</span>
       <span class="ttl">${esc(v.title)}<span class="build">${esc(v.build)}</span></span>
       <span class="tags">${v.kind === "steam" ? '<span class="tag steam">Steam</span>' : '<span class="tag">User installation</span>'}${v.hotfix ? '<span class="tag hot">Hotfixes</span>' : ""}</span>

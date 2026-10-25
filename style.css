@@ -21,6 +21,7 @@ a { color: var(--link); text-decoration: none; border-bottom: 1px solid #4a3a6a;
 a:hover { border-color: var(--link); }
 code { color: var(--code); font: 13px var(--mono); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; overflow-wrap: anywhere; }
 [hidden] { display: none !important; }
+code.nw { white-space: nowrap; }
 .bar { position: sticky; top: 0; z-index: 5; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding: 14px 24px; background: rgba(0,0,0,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .brand { color: var(--fg); border: 0; font-weight: 500; white-space: nowrap; }
 .bar-right { display: flex; justify-content: flex-end; }
@@ -84,6 +85,10 @@ li ul { margin: 6px 0 0; }
 .vrow:hover { background: var(--hover); }
 .vrow .ver { font: 500 13px var(--mono); }
 .vrow .upto { display: block; font: 11.5px var(--mono); color: var(--faint); }
+.vnote { padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--panel); font-size: 14px; }
+.vnote strong { font-weight: 600; }
+.vnote p { margin: 4px 0 6px; color: var(--dim); }
+.vnote ul { margin: 0; }
 .vrow .ttl { overflow-wrap: anywhere; }
 .vrow .build { display: block; font: 11.5px var(--mono); color: var(--faint); }
 .tags { display: flex; gap: 6px; }
@@ -138,6 +143,9 @@ li ul { margin: 6px 0 0; }
 .tpl pre { margin: 0; padding: 14px; max-height: 480px; overflow: auto; border-top: 1px solid var(--line); }
 .tpl pre code { background: none; border: 0; padding: 0; color: var(--fg); white-space: pre; }
 .tpl-actions { display: flex; gap: 8px; margin: 8px 0 4px; }
+.table { border-collapse: collapse; margin: 0 0 14px; min-width: 320px; }
+.table th, .table td { border: 1px solid var(--line); padding: 8px 14px; text-align: left; }
+.table th { color: var(--dim); font-weight: 500; font-size: 13px; background: var(--panel); }
 @media (max-width: 700px) {
   .lead { white-space: normal; width: auto; margin: 8px 0 0; transform: none; text-align: center; font-size: 19px; }
   .steps { flex-direction: column; align-items: flex-start; }
