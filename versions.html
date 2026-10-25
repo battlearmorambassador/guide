@@ -32,13 +32,14 @@
     status.textContent = rows.length + (rows.length === 1 ? " version" : " versions");
     list.hidden = !rows.length;
     list.innerHTML = rows.map((v) => `<a class="vrow" href="version.html?${v.kind === "steam" ? "m=" + v.manifest : "u=" + encodeURIComponent(v.id)}">
-      <span class="ver">${esc(v.version)}</span>
+      <span class="ver">${esc(v.version)}${v.upTo ? `<span class="upto">to ${esc(v.upTo)}</span>` : ""}</span>
       <span class="ttl">${esc(v.title)}<span class="build">${esc(v.build)}</span></span>
       <span class="tags">${v.kind === "steam" ? '<span class="tag steam">Steam</span>' : '<span class="tag">User installation</span>'}${v.hotfix ? '<span class="tag hot">Hotfixes</span>' : ""}</span>
     </a>`).join("");
   };
   loadVersions().then((d) => {
-    all = [...d.steam.map((v) => ({ ...v, kind: "steam", hotfix: d.patches.has(v.manifest) })), ...d.users.map((v) => ({ ...v, kind: "user" }))]
+    const upTo = (v) => (d.patches.get(v.manifest)?.versions || []).filter((x) => cmpVersion(x, v.version) > 0).pop();
+    all = [...d.steam.map((v) => ({ ...v, kind: "steam", hotfix: d.patches.has(v.manifest), upTo: upTo(v) })), ...d.users.map((v) => ({ ...v, kind: "user" }))]
       .sort((a, b) => cmpVersion(versionKey(b.version), versionKey(a.version)) || (a.kind === "steam" ? -1 : 1));
     draw();
   }).catch((e) => (status.textContent = "Could not load the version list: " + e.message));
