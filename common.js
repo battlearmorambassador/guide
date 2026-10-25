@@ -5,7 +5,7 @@ const GUIDES = [
   ["Getting started", [["client-setup.html", "Client Setup"], ["server-setup.html", "Server Setup"]]],
   ["Extras", [["importing.html", "Importing"], ["chat-hubs.html", "Chat & Hubs"], ["multiplayer.html", "Multiplayer"], ["port-forwarding.html", "Port Forwarding"]]],
   ["Advanced", [["metadata-patching.html", "Metadata Patching"], ["dockerized-setup.html", "Dockerized Setup"], ["hardening-security.html", "Hardening Security"]]],
-  ["Reference", [["manual.html", "Bootstrapper Manual"], ["templates.html", "Templates & verifier"]]],
+  ["Reference", [["manual.html", "Bootstrapper Manual"], ["templates.html", "Templates & Checker"]]],
 ];
 const DISCORD = "https://discord.gg/PNNZ3asUuY";
 const BUILDER = "https://battlearmorambassador.github.io/builder/";
