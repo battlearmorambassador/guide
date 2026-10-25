@@ -37,7 +37,6 @@
   </div>
 </main>
 <script>
-  $("#warn-icon").innerHTML = tipIcon;
   loadVersions().then((v) => {
     $("#lowest").textContent = v.lowest;
     $("#highest").textContent = v.highest;

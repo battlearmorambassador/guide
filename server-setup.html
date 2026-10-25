@@ -26,7 +26,8 @@
       <ul>
         <li>Windows: <div class="cmd"><code>copy config-vanilla.json config.json</code></div></li>
         <li>Linux: <div class="cmd"><code>cp config-vanilla.json config.json</code></div></li>
-      </ul></li>
+      </ul>
+      <code>config.json</code> gives you many options, such as the server's address, ports and world state events. Check the <a href="templates.html#server">Templates &amp; verifier</a> page to learn more.</li>
     <li>(Optional) If you have a GB of free space, you might want to download stripped assets such as ability videos so the client can request them on-demand:
       <div class="cmd"><code>cd static/data &amp;&amp; git clone https://openwf.io/stripped-assets.git &amp;&amp; cd ../..</code></div></li>
     <li>Install library dependencies:
@@ -35,6 +36,7 @@
       <div class="cmd"><code>npm run raw</code></div></li>
   </ul>
   <p class="info">Linux note: OpenWF software uses ports 80 and 443 by default, which require root/su permissions to bind.</p>
+
   <h2>First login</h2>
   <ul>
     <li>Start the server (using <code>UPDATE AND START SERVER.bat</code> or in a cmd window with <code>npm run raw</code>) and leave its window open for as long as you play. To check that it's running, open <a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> in your browser: you should see the WebUI.</li>

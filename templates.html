@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Templates &amp; verifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="common.js"></script>
+<main>
+  <h1>Templates &amp; verifier</h1>
+  <p class="warn">Use these templates as a reference, not as-is. Edit them to match your setup.</p>
+
+  <h2 id="client">Client template (bootstrapper)</h2>
+  <p class="muted">Goes in <code>OpenWF/Client Config.json</code>, next to the game's executable.</p>
+  <div id="tpl-client"></div>
+
+  <h2 id="server">Server template (SpaceNinjaServer)</h2>
+  <p class="muted">Goes in <code>config.json</code>, in your SpaceNinjaServer folder.</p>
+  <div id="tpl-server"></div>
+
+  <h2>Verifier</h2>
+  <p>Drag and drop your populated config file to check its validity.</p>
+  <div id="checker"></div>
+</main>
+<script src="templates.js"></script>
+<script>
+  templateBlock($("#tpl-client"), "client");
+  templateBlock($("#tpl-server"), "server");
+  configChecker($("#checker"));
+</script>
+</body>
+</html>

@@ -115,7 +115,28 @@ li ul { margin: 6px 0 0; }
 .step-tag.mandatory { color: var(--faint); }
 .step-tag.optional { color: var(--faint); }
 .step-line { flex: 1; height: 1px; background: var(--line-2); min-width: 16px; }
-
+.dropzone { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 26px 16px; margin: 12px 0; border: 1px dashed var(--line-2); border-radius: 6px; background: var(--panel); cursor: pointer; text-align: center; outline: none; }
+.dropzone:hover, .dropzone:focus, .dropzone.over { border-color: var(--fg); }
+.dropzone strong { font-weight: 500; }
+.check-out:empty { display: none; }
+.check-out { border: 1px solid var(--line); border-radius: 6px; margin-bottom: 12px; }
+.check-head { padding: 10px 14px; font-weight: 500; border-bottom: 1px solid var(--line); }
+.check-head.error { color: #ff5f56; }
+.check-head.warning { color: var(--warn); }
+.check-head .detected { display: block; font-size: 12px; font-weight: 400; color: var(--dim); }
+.check-head.ok { color: #4ade80; border-bottom: 0; }
+.check-row { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.check-row:last-child { border-bottom: 0; }
+.check-row .sev { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .04em; padding-top: 3px; }
+.check-row.error .sev { color: #ff5f56; }
+.check-row.warning .sev { color: var(--warn); }
+.check-row.info .sev { color: var(--info); }
+.tpl { border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+.tpl summary { cursor: pointer; padding: 10px 14px; font-weight: 500; }
+.tpl summary:hover { background: var(--hover); }
+.tpl pre { margin: 0; padding: 14px; max-height: 480px; overflow: auto; border-top: 1px solid var(--line); }
+.tpl pre code { background: none; border: 0; padding: 0; color: var(--fg); white-space: pre; }
+.tpl-actions { display: flex; gap: 8px; margin: 8px 0 4px; }
 @media (max-width: 700px) {
   .lead { white-space: normal; width: auto; margin: 8px 0 0; transform: none; text-align: center; font-size: 19px; }
   .steps { flex-direction: column; align-items: flex-start; }
