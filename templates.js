@@ -80,7 +80,7 @@ const TEMPLATES = {
   "nrsAddresses": [],
   "dtls": null,
   "administratorNames": [ // gives you access to admin related features in WebUI
-    "Player1",
+    "Player1", // change this to your actual username
     "Player2",
     "Player3",
     "Player4"
