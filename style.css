@@ -146,6 +146,11 @@ li ul { margin: 6px 0 0; }
 .table { border-collapse: collapse; margin: 0 0 14px; min-width: 320px; }
 .table th, .table td { border: 1px solid var(--line); padding: 8px 14px; text-align: left; }
 .table th { color: var(--dim); font-weight: 500; font-size: 13px; background: var(--panel); }
+.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 10px 0 16px; }
+.person { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); }
+.person:hover { border-color: var(--line-2); }
+.person img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.person strong { display: block; font-weight: 500; }
 @media (max-width: 700px) {
   .lead { white-space: normal; width: auto; margin: 8px 0 0; transform: none; text-align: center; font-size: 19px; }
   .steps { flex-direction: column; align-items: flex-start; }
