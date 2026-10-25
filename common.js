@@ -104,8 +104,6 @@ function copyButtons(root = document) {
 }
 
 const tipIcon = '<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 1.2 15.3 14H.7L8 1.2Zm0 4.1c-.5 0-.8.4-.8.8l.2 3.9c0 .3.3.6.6.6s.6-.3.6-.6l.2-3.9c0-.4-.3-.8-.8-.8Zm0 6.1a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Z"/></svg>';
-const tip = (html) => `<span class="tip" tabindex="0">${tipIcon}<span class="tip-box" role="tooltip">${html}</span></span>`;
-
 const strip = (s = "") => s.replace(/<!--[\s\S]*?-->/g, "").replace(/<\?[\s\S]*?\?>/g, "").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").trim();
 const cmpVersion = (a, b) => {
   const x = a.split(".").map(Number), y = b.split(".").map(Number);

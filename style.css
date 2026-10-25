@@ -71,12 +71,6 @@ li ul { margin: 6px 0 0; }
 .methods { margin: 14px 0 6px; color: var(--dim); font-size: 14px; }
 .methods button { background: none; border: 0; border-bottom: 1px solid #4a3a6a; padding: 0; color: var(--link); font: inherit; cursor: pointer; }
 .methods button:hover { border-color: var(--link); }
-
-.tip { position: relative; display: inline-flex; vertical-align: -2px; margin-left: 6px; color: var(--warn); cursor: help; outline: none; }
-.tip-box { position: absolute; left: -10px; bottom: calc(100% + 8px); width: 300px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--warn); border-radius: 6px; color: var(--fg); font-size: 13px; line-height: 1.5; font-weight: 400; z-index: 20; visibility: hidden; opacity: 0; transition: opacity .15s, visibility 0s linear .6s; }
-.tip-box::after { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 10px; }
-.tip:hover .tip-box, .tip:focus .tip-box { visibility: visible; opacity: 1; transition: opacity .15s; }
-
 .search { width: 100%; background: var(--bg); color: var(--fg); border: 1px solid var(--line-2); border-radius: 6px; padding: 10px 14px; font: inherit; outline: none; margin-bottom: 14px; }
 .search:focus { border-color: var(--fg); }
 .vlist { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }

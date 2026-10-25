@@ -20,15 +20,16 @@
   const manifest = params.get("m"), userId = params.get("u");
   const methods = {
     mango: (m) => `
-      <h3>Use mango (recommended)${tip("To install mango, open a command prompt and type <code>npm i -g steam-manifest-tools</code>.")}</h3>
+      <h3>Using mango (recommended)</h3>
+      <p class="warn"><span class="icon">${tipIcon}</span>To install mango, open a command prompt and type <code class="nw">npm i -g steam-manifest-tools</code>.</p>
       <ul>
-        <li>Create a dedicated folder and open a command prompt/terminal in it (on Windows, type <code>cmd</code> in the File Explorer address bar and press Enter). Don't run the commands below from the default path (<code>C:\\Windows\\System32</code>).</li>
+        <li>Create a dedicated folder and open a command prompt/terminal in it (on Windows, type <code>cmd</code> in the File Explorer address bar and press Enter). Don't run the command below from the default path (<code>C:\\Windows\\System32</code>).</li>
         <li>Download this version by typing:
           <div class="cmd"><code>mango download-and-install 230411 ${m}</code></div></li>
       </ul>
       <p>When the download and install are complete, the command prompt shows a new input line and is ready for another command. The process might show errors while it runs: ignore them until it has finished.</p>`,
     dd: (m) => `
-      <h3>Use DepotDownloader</h3>
+      <h3>Using DepotDownloader</h3>
       <ul>
         <li>Download <a href="https://github.com/SteamRE/DepotDownloader/releases" target="_blank" rel="noopener">DepotDownloader</a> and extract it.</li>
         <li>Open a command prompt/terminal in the folder where you have <code>DepotDownloader.exe</code>.</li>
@@ -37,7 +38,7 @@
       </ul>
       <p>Note that DepotDownloader may report errors; these are generally only temporary and it will try again.</p>`,
     steam: (m) => `
-      <h3>Use the Steam console</h3>
+      <h3>Using the Steam console</h3>
       <p class="warn">This method is not recommended unless you absolutely know what you are doing. You will also need a Steam account with Warframe in its library.</p>
       <ul>
         <li>Open Steam's console.</li>
